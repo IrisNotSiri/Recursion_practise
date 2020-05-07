@@ -30,16 +30,14 @@ def get_permutations(sequence):
       return sequlist
     
     # a permutation of sequence except the first letter
-    for a in sequence:  # the first letter
-      remaining_letter = []
-      for x in sequence:
-        if x != a:
-          remaining_letter.append(x)
-      remain_list = get_permutations (remaining_letter) # recursion
-      
-      for t in remain_list:
-        sequlist.append([a] + t)
-      # the first letter is placed in different place of the permutation of remaining character 
+    for x, letter in enumerate(sequence):
+      # print (list(enumerate(sequence)))
+      for remain_letter in get_permutations(sequence[:x]+sequence[x+1:]):
+        # print (remain_letter)
+        sequlist += [letter + remain_letter]
+        # the first letter
+     
+    
     return sequlist
     
 
@@ -54,7 +52,7 @@ if __name__ == '__main__':
 #    to be three characters or fewer as you will have n! permutations for a 
 #    sequence of length n)
 
-  example_input1 = 'abc'
+  example_input1 = 'ab'
   print ('Input:', example_input1)
   print ('Expected Output: ',['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
   print ('Actual Output: ',get_permutations(example_input1))
@@ -68,3 +66,6 @@ if __name__ == '__main__':
   print ('Input:', example_input3)
   print ('Expected Output: ',['cup', 'cpu', 'ucp', 'upc', 'pcu', 'puc'])
   print ('Actual Output: ',get_permutations(example_input3))
+
+  
+
